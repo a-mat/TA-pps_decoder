@@ -1,0 +1,26 @@
+<form stylesheet="custom.css">
+  <label>Proofpoint Decoder</label>
+  <searchTemplate>| script proofpoint_decode __EXECUTE__ "$input$"</searchTemplate>
+  <!-- Add time range picker -->
+  <fieldset autoRun="True" submitButton="true">
+    <input type="text" searchWhenChanged="true" token="input">
+      <label>Encoded Link</label>
+      <default>https://urldefense.proofpoint.com/v2/url?u=http-3A__www.google.com&amp;d=DwMBaQ&amp;c=Vxt5e0Osvvt2gflwSlsJ5DmPGcPvTRKLJyp031rXjhg&amp;r=U7dT0lFTeyLPTT18j4jTT-QA0_6S0SNyKKRkIm_J6m0&amp;m=phBCMPbh8b9Q8KZOis22AQ2dvsY8EX3owRM-4hZtz1o&amp;s=tyrC6QslpNIWXiCLUXJEbjm0oo5vBoSwGrVYEhO1xBw&amp;e=</default>
+      <initialValue>https://urldefense.proofpoint.com/v2/url?u=http-3A__www.google.com&amp;d=DwMBaQ&amp;c=Vxt5e0Osvvt2gflwSlsJ5DmPGcPvTRKLJyp031rXjhg&amp;r=U7dT0lFTeyLPTT18j4jTT-QA0_6S0SNyKKRkIm_J6m0&amp;m=phBCMPbh8b9Q8KZOis22AQ2dvsY8EX3owRM-4hZtz1o&amp;s=tyrC6QslpNIWXiCLUXJEbjm0oo5vBoSwGrVYEhO1xBw&amp;e=</initialValue>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <search base="global">
+          <query>| table answer</query>
+        </search>
+        <option name="count">70</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="rowNumbers">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</form>
