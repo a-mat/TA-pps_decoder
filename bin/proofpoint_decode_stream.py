@@ -8,7 +8,7 @@ import string
 splunkhome = os.environ['SPLUNK_HOME']
 sys.path.append(os.path.join(splunkhome, 'etc', 'apps', 'searchcommands_app', 'lib'))
 from splunklib.searchcommands import dispatch, StreamingCommand, Configuration, Option, validators
-from splunklib import six
+from url_defanger import defanger
 
 if sys.version_info[0] < 3:
     from urllib import unquote
@@ -117,7 +117,7 @@ class proofpoint_decode_stream(StreamingCommand):
     """
     String convert to pps
 
-     | pps_decode input_field=<string> (output_field=<string>)?
+     | pps_decode input_field=<string> ((output_field=<string>)? (defang=<True|False>)?)?
     """
 
     input_field = Option(
@@ -129,16 +129,22 @@ class proofpoint_decode_stream(StreamingCommand):
     output_field = Option(name='output_field', require=False, default="pps_decoded")
     defang = Option(name='defang', require=False, default="True")
     suppress_error = Option(name='suppress_error', require=False, default=False, validate=validators.Boolean())
+
     def stream(self, records):
         self.logger.debug('CountMatchesCommand: %s', self)  # logs command line
         for record in records:
             new_field = self.input_field
             output_field = self.output_field
+            defang = self.defang
             urldefense_decoder = URLDefenseDecoder()
             url_field = record[new_field]
             try:
                 decoded = urldefense_decoder.decode(url_field)
-                record[output_field] = decoded
+                if defang == "False":
+                    record[output_field] = decoded
+                else:
+                    defang_field_value = defanger(decoded)
+                    record[output_field] = defang_field_value
             except ValueError as e:
                 print(e)
             yield record

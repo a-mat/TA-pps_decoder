@@ -92,24 +92,13 @@ def defang(line, all_dots=False, colon=False, zero_width_replace=False):
     return line
 
 
-def defanger(infile, outfile):
-    '''
-    Takes an input file-like object, and writes the defanged content to the
-    outfile file-like object.
+def defanger(infile):
 
-    :param file-like infile: the object to be read from and defanged
-    :param file-like outfile: the file-like object to write the defanged output
-    :return: None
-    '''
-    for line in infile:
-        print("this is a line" + line)
-        clean_line = defang(line)
-        print(clean_line)
-        outfile = clean_line
-        #outfile.write(clean_line)
+    clean_line = defang(infile)
+  #  print("this is the clean file" +clean_line)
+    output = clean_line
+    return output
 
 if __name__ == '__main__':
-    this_sam = ["http://google.com"]
-    daf = ""
-    defanger(this_sam,daf)
-    print(daf)
+    this_sam = "http://google.com"
+    defanger(this_sam)
