@@ -127,6 +127,7 @@ class proofpoint_decode_stream(StreamingCommand):
         name='input_field', require=True, validate=validators.Fieldname())
     
     output_field = Option(name='output_field', require=False, default="pps_decoded")
+    defang = Option(name='defang', require=False, default="True")
     suppress_error = Option(name='suppress_error', require=False, default=False, validate=validators.Boolean())
     def stream(self, records):
         self.logger.debug('CountMatchesCommand: %s', self)  # logs command line
