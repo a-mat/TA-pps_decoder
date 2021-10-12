@@ -124,10 +124,10 @@ class proofpoint_decode_stream(StreamingCommand):
         doc='''
                 **Syntax:** **input_field=***<field>*
                 **Description:** Name of the field that contains encoded url''',
-        name='input_field', require=True)
+        name='input_field', require=True, validate=validators.Fieldname())
     
     output_field = Option(name='output_field', require=False, default="pps_decoded")
-
+    suppress_error = Option(name='suppress_error', require=False, default=False, validate=validators.Boolean())
     def stream(self, records):
         self.logger.debug('CountMatchesCommand: %s', self)  # logs command line
         for record in records:
