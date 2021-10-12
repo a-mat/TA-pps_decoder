@@ -41,8 +41,6 @@ The following is the list of parameters. Any values that contain spaces, must be
 *  "input_field"   - [required]  Specify the field that contains encoded url
 *  "output_field"  - [optional]  Specify where the field you want to display the decoded string (default: pps_decoded)
 
-# Running outside of Splunk.
-
 
 
 # License
